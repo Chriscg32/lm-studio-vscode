@@ -1,0 +1,43 @@
+{
+  "name": "lm-studio-vscode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/lm-studio-vscode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yourusername/lm-studio-vscode/issues"
+  },
+  "homepage": "https://github.com/yourusername/lm-studio-vscode#readme",
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.15.2",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@types/vscode": "^1.99.1",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@typescript-eslint/parser": "^8.31.0",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.25.1",
+    "glob": "^11.0.2",
+    "mocha": "^11.1.0",
+    "preact": "^10.26.5",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.3",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.0.4"
+  }
+}
