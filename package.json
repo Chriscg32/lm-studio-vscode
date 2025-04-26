@@ -1,43 +1,289 @@
 {
-  "name": "lm-studio-vscode",
+  "name": "lmstudio-vscode-extension",
+  "displayName": "LM Studio Integration",
+  "description": "VS Code extension for integrating with LM Studio - A powerful, accessible, and user-friendly AI development assistant",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "publisher": "lmstudio-community",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/lm-studio-vscode.git"
+    "url": "https://github.com/lmstudio-community/lmstudio-vscode-extension.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/yourusername/lm-studio-vscode/issues"
+  "engines": {
+    "vscode": "^1.85.0"
   },
-  "homepage": "https://github.com/yourusername/lm-studio-vscode#readme",
+  "categories": [
+    "Other",
+    "Programming Languages",
+    "Snippets",
+    "Machine Learning",
+    "AI",
+    "Productivity"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "lmstudio-vscode-extension.connect",
+        "title": "Connect to LM Studio"
+      },
+      {
+        "command": "lmstudio-vscode-extension.disconnect",
+        "title": "Disconnect from LM Studio"
+      },
+      {
+        "command": "lmstudio-vscode-extension.generateProject",
+        "title": "Generate Project from Idea"
+      },
+      {
+        "command": "lmstudio-vscode-extension.startCollaboration",
+        "title": "Start Collaboration Session"
+      },
+      {
+        "command": "lmstudio-vscode-extension.browseTemplates",
+        "title": "Browse Project Templates"
+      },
+      {
+        "command": "lmstudio-vscode-extension.showAnalytics",
+        "title": "Show Project Analytics"
+      },
+      {
+        "command": "lmstudio-vscode-extension.deployProject",
+        "title": "Deploy Project"
+      },
+      {
+        "command": "lmstudio-vscode-extension.showAssistant",
+        "title": "Show AI Assistant"
+      },
+      {
+        "command": "lmstudio-vscode-extension.applySuggestion",
+        "title": "Apply AI Suggestion"
+      },
+      {
+        "command": "lmstudio-vscode-extension.explainCode",
+        "title": "Explain Selected Code"
+      },
+      {
+        "command": "lmstudio-vscode-extension.generateTests",
+        "title": "Generate Tests for Current File"
+      },
+      {
+        "command": "lmstudio-vscode-extension.showSettings",
+        "title": "Show LM Studio Settings"
+      },
+      {
+        "command": "lmstudio-vscode-extension.showPerformanceReport",
+        "title": "Show Performance Report"
+      },
+      {
+        "command": "lmstudio-vscode-extension.changeLanguage",
+        "title": "Change Language"
+      }
+    ],
+    "configuration": {
+      "title": "LM Studio",
+      "properties": {
+        "lmstudio.host": {
+          "type": "string",
+          "default": "http://localhost:1234",
+          "description": "LM Studio server host"
+        },
+        "lmstudio.model": {
+          "type": "string",
+          "description": "Default model to use"
+        },
+        "lmstudio.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "description": "Temperature for model responses"
+        },
+        "lmstudio.maxTokens": {
+          "type": "number",
+          "default": 1000,
+          "description": "Maximum tokens for model responses"
+        },
+        "lmstudio.stream": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable streaming responses"
+        },
+        "lmstudio.features.codeAssistant": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI code assistant"
+        },
+        "lmstudio.features.analytics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable project analytics"
+        },
+        "lmstudio.features.templates": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable project templates"
+        },
+        "lmstudio.features.collaboration": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time collaboration"
+        },
+        "lmstudio.ui.theme": {
+          "type": "string",
+          "enum": ["light", "dark", "system"],
+          "default": "system",
+          "description": "UI theme preference"
+        },
+        "lmstudio.ui.fontSize": {
+          "type": "number",
+          "default": 14,
+          "description": "UI font size"
+        },
+        "lmstudio.ui.showStatusBar": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show status bar item"
+        },
+        "lmstudio.ui.showNotifications": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications"
+        },
+        "lmstudio.security.allowTelemetry": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow telemetry data collection"
+        },
+        "lmstudio.security.allowCrashReports": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow crash report submission"
+        },
+        "lmstudio.security.allowUsageData": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow usage data collection"
+        },
+        "lmstudio.performance.logLevel": {
+          "type": "string",
+          "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+          "default": "INFO",
+          "description": "Logging level for performance monitoring"
+        },
+        "lmstudio.accessibility.highContrast": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable high contrast mode"
+        },
+        "lmstudio.accessibility.reducedMotion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable reduced motion"
+        },
+        "lmstudio.accessibility.screenReader": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable screen reader support"
+        },
+        "lmstudio.language": {
+          "type": "string",
+          "default": "en",
+          "description": "Extension language"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "lmstudio-vscode-extension.explainCode",
+          "group": "lmstudio"
+        },
+        {
+          "command": "lmstudio-vscode-extension.generateTests",
+          "group": "lmstudio"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "lmstudio-vscode-extension.showAssistant",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "lmstudio-sidebar",
+          "title": "LM Studio",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "lmstudio-sidebar": [
+        {
+          "id": "lmstudio-projects",
+          "name": "Projects"
+        },
+        {
+          "id": "lmstudio-templates",
+          "name": "Templates"
+        },
+        {
+          "id": "lmstudio-analytics",
+          "name": "Analytics"
+        },
+        {
+          "id": "lmstudio-performance",
+          "name": "Performance"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "node ./out/test/runTest.js",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package",
+    "test:coverage": "nyc npm test",
+    "test:watch": "npm test -- --watch",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
   "devDependencies": {
     "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.10",
-    "@types/node": "^22.15.2",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.1.2",
-    "@types/vscode": "^1.99.1",
-    "@typescript-eslint/eslint-plugin": "^8.31.0",
-    "@typescript-eslint/parser": "^8.31.0",
-    "@vscode/test-electron": "^2.5.2",
-    "eslint": "^9.25.1",
-    "glob": "^11.0.2",
-    "mocha": "^11.1.0",
-    "preact": "^10.26.5",
-    "ts-loader": "^9.5.2",
-    "typescript": "^5.8.3",
-    "webpack": "^5.99.7",
-    "webpack-cli": "^6.0.1"
+    "@types/mocha": "^10.0.6",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.85.0",
+    "@types/ws": "^8.5.10",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "nyc": "^15.1.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "ts-loader": "^9.5.1",
+    "copy-webpack-plugin": "^11.0.0",
+    "html-webpack-plugin": "^5.6.0"
   },
   "dependencies": {
-    "@preact/signals": "^2.0.4"
+    "axios": "^1.6.2",
+    "ws": "^8.16.0",
+    "i18next": "^23.7.11",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-http-backend": "^2.4.2",
+    "chart.js": "^4.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "styled-components": "^6.1.8"
   }
 }
